@@ -1,0 +1,16 @@
+@import '../../variables/style'
+@import './__card/Daily__card'
+@import './__date/Daily__date'
+@import './__day/Daily__day'
+@import './__temp/Daily__temp'
+@import './__weather-description/Daily__weather-description'
+
+.Daily
+    width: 1000px
+
+@media(max-width: $tablets)
+    .Daily
+        width: calc( 100% - 50px )
+@media(max-width: $phones)
+    .Daily
+        width: calc( 100% - 26px )

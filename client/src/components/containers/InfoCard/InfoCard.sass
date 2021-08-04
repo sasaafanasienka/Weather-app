@@ -1,0 +1,36 @@
+@import './__detail-card/InfoCard__detail-card'
+    
+.InfoCard
+    width: 100%
+    height: 100%
+    max-height: 300px
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+    gap: 7px 7px
+    align-items: center
+    background-color: #e9e9e9
+    padding: 20px
+    box-sizing: border-box
+    border-radius: 4px
+    grid-area: infocard
+
+@media(max-width: 980px)
+    .InfoCard
+        grid-template-columns: repeat(4, 1fr)
+        grid-template-rows: 1fr
+@media(max-width: 665px)
+    .InfoCard
+        grid-template-columns: repeat(2, 1fr)
+        grid-template-rows: кузуфе(2, 1fr)
+
+.InfoCard p 
+    text-align: left
+    font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif
+    font-weight: bold
+    font-size: 18px
+    line-height: 18px
+    margin: 0 0 0 0
+    text-align: left
+    color: black
+    letter-spacing: 1px

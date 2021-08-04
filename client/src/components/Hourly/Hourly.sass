@@ -1,0 +1,16 @@
+@import './__time/Hourly__time.sass'
+@import './__icon/Hourly__icon.sass'
+@import './__temp/Hourly__temp.sass'
+@import './__arrow/Hourly__arrow.sass'
+@import './__wind/Hourly__wind.sass'
+@import '../../variables/style'
+    
+.Hourly
+    width: 1000px
+
+@media(max-width: $tablets)
+    .Hourly
+        width: calc( 100% - 50px )
+@media(max-width: $phones)
+    .Hourly
+        width: calc( 100% - 26px )
