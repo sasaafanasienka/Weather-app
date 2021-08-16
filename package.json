@@ -27,7 +27,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "phoenix": "^1.5.10",
-    "valid-url": "^1.0.9"
+    "valid-url": "^1.0.9",
+    "ws": "^8.1.0"
   },
   "devDependencies": {
     "concurrently": "^6.0.1",
