@@ -16,7 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@heroku-cli/plugin-buildpacks": "^7.54.0",
+    "@heroku-cli/plugin-ci": "^7.54.0",
     "@heroku/buildpack-registry": "^1.0.1",
+    "async-file": "^2.0.2",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "express": "^4.17.1",
