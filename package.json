@@ -11,6 +11,8 @@
   "author": "aliaksandr afanasienka <afanasienka@yandex.by>",
   "license": "ISC",
   "dependencies": {
+    "@heroku-cli/plugin-buildpacks": "^7.54.0",
+    "@heroku/buildpack-registry": "^1.0.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "express": "^4.17.1",
