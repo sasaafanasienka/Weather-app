@@ -1,21 +1,7 @@
-@font-face {
-  font-family: Oswald;
-  font-style: regular;
-  font-weight: 400;
-  src: local('Oswald Regular'),
-       local('Oswald-regular'), 
-       url(./fonts/static/Oswald-Regular.ttf);
-}
-
-@font-face {
-  font-family: Oswald;
-  font-style: bold;
-  font-weight: 600;
-  src: local('Oswald Bold'),
-       local('Oswald-bold'), 
-       url(./fonts/static/Oswald-Bold.ttf);
-}
-
 body {
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: 'Scada', sans-serif;
+  min-height: 100vh;
+  background-color: rgb(0, 204, 255);
+  padding: 0;
+  margin: 0;
 }

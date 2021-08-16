@@ -1,27 +1,24 @@
 @import '../../variables/style'
+@import './__auth-block/Header__auth-block'
     
 .Header
     position: relative
-    top: 0
-    left: 0
-    width: 100%
-    padding: 25px $paddingMin1000
-    margin: 0 0 20px 0
+    width: 1000px
+    padding: 25px
+    margin: 0 auto 20px
     box-sizing: border-box
-    background-color: $base-color
     z-index: 10
     display: flex
     flex-wrap: nowrap
     justify-content: space-between
     align-items: center
 
-@media(max-width: $tablets)
+@media(max-width: 1000px)
     .Header
-        padding: 25px
+        width: 100%
 
 .Header__logo
     height: 36px
-    cursor: pointer
 
 .Header__username
     color: white

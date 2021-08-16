@@ -4,7 +4,6 @@
   "description": "weather app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -16,8 +15,11 @@
     "config": "^3.3.6",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
+    "heroku": "^7.56.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-yandex-maps": "^4.6.0",
     "swiper": "^6.7.5"
   },

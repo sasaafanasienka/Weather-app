@@ -1,54 +1,50 @@
+//styles
 import './App.css';
+//libs
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import 'semantic-ui-css/semantic.min.css'
-import { observer } from 'mobx-react-lite';
+import Header from './components/Header/Header';
+import { useDispatch, useSelector } from 'react-redux';
+import MainPage from './pages/MainPage/MainPage';
+import SearchForm from './components/SearchForm/SearchForm';
+import Favourites from './components/Favourites/Favourites';
 import { useEffect } from 'react';
-import auth from './store/AuthStore'
-import weatherStore from './store/WeatherStore'
-import AuthPage from './pages/AuthPage/AuthPage';
-import RegPage from './pages/AuthPage/RegPage';
-import LocationPage from './pages/LocationPage/LocationPage';
-import LoadingPage from './pages/LoadingPage/LoadingPage';
-import authStore from './store/AuthStore';
-import windowSizeStore from './store/WindowSizeStore';
+import { resizeWindow } from './redux/actions/window/resizeWindow';
 
-const App = observer(() => {
+const App = () => {
 
-  const weatherData = {...weatherStore.data}
+  const coords = useSelector(state => { return state.coords })
+  const auth = useSelector(state => { return state.auth })
+  const dispatch = useDispatch()
 
   const handleResize = event => {
-    windowSizeStore.changeWidth(event.target.innerWidth)
+    dispatch(resizeWindow(event.target.innerWidth))
   }
 
   useEffect(() => {
-    authStore.localLogin()
-    windowSizeStore.changeWidth(window.innerWidth)
     window.addEventListener('resize', handleResize)
     return () => {window.removeEventListener('resize', handleResize)}
   })
 
   return (
-    <div className="App" onResize={() => {console.log(1)}}>
-      <BrowserRouter
-        forceRefresh={true}
-      >
+    <div className="App">
+      <BrowserRouter>
+        <Header/>
+        {auth.isAuth && <Favourites/>}
+        <SearchForm/>
         <Switch>
           <Route exact path='/'>
-            {weatherData.id === undefined ? <LoadingPage/> : <Redirect to={`/${weatherData.id}`} />}
+            {!coords.isLoaded ? <MainPage /> : <Redirect to={`/coords&lat=${coords.lat}&lon=${coords.lon}`} />}
           </Route>
-          <Route path='/login' >
-            {!auth.isAuth ? <AuthPage/> : <Redirect to='/' />}
+          <Route exact path={`/coords&:coords`}>
+            <MainPage />
           </Route>
-          <Route path='/register' >
-            {!auth.isAuth ? <RegPage/> : <Redirect to='/' />}
-          </Route>
-          <Route path='/:id' >
-            <LocationPage/>
+          <Route exact path={`/id&:id`}>
+            <MainPage />
           </Route>
         </Switch>
       </BrowserRouter>
     </div>
   );
-})
+}
 
 export default App;

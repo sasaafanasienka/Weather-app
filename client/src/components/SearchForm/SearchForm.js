@@ -1,10 +1,11 @@
 import './SearchForm.sass'
 import React, { useState } from 'react'
-import { observer } from 'mobx-react'
-import { useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'; 
 import getRequestUrl from '../../utilits/getRequestUrl'
+import { useDispatch } from 'react-redux';
+import { clearWeather } from '../../redux/actions/weather/clearWeather';
 
-const SearchForm = observer(() => {
+const SearchForm = () => {
 
     const history = useHistory()
 
@@ -12,6 +13,8 @@ const SearchForm = observer(() => {
     const [hints, setHints] = useState([])
     const [hintsVisibility, setHintsVisibility] = useState(false)
     const [focus, setFocus] = useState(0)
+
+    const dispatch = useDispatch()
 
     const setText = async (event) => {
         setTextToSearch(event.target.value)
@@ -31,7 +34,34 @@ const SearchForm = observer(() => {
     const search = async (event) => {
         event.preventDefault()
         if (hints.length > 0) {
-            history.push(`/${hints[focus].id}`)
+            history.push(`/id&${hints[focus].id}`)
+            dispatch(clearWeather())
+            setHints([])
+            setTextToSearch('')
+        }
+    }
+    
+    const changeFocus = (event) => {
+        if (event.code === 'ArrowDown') { event.preventDefault(); setFocus(focus === hints.length - 1 ? 0 : focus + 1) }
+        if (event.code === 'ArrowUp') { event.preventDefault(); setFocus(focus === 0 ? hints.length - 1 : focus - 1) }
+    }
+    
+    const changeFocusByMouse = (event) => {
+        setFocus(Number(event.target.id))
+    }
+    
+    const historyPush = (event) => {
+        history.push(`/id&${hints[event.target.id].id}`)
+        dispatch(clearWeather())
+        setHints([])
+        setTextToSearch('')
+    }
+    
+    const blur = (event) => {
+        if (!event.relatedTarget || !event.relatedTarget.classList.contains('SearchForm__hints-button_selected')) {
+            setHintsVisibility(false)
+        } else {
+            event.target.focus()
         }
     }
 
@@ -54,40 +84,19 @@ const SearchForm = observer(() => {
         })
     }
 
-    const changeFocus = (event) => {
-        if (event.code === 'ArrowDown') { event.preventDefault(); setFocus(focus === hints.length - 1 ? 0 : focus + 1) }
-        if (event.code === 'ArrowUp') { event.preventDefault(); setFocus(focus === 0 ? hints.length - 1 : focus - 1) }
-    }
-
-    const changeFocusByMouse = (event) => {
-        setFocus(Number(event.target.id))
-    }
-
-    const historyPush = (event) => {
-        history.push(`/${hints[event.target.id].id}`)
-    }
-
-    const blur = (event) => {
-        if (!event.relatedTarget || !event.relatedTarget.classList.contains('SearchForm__hints-button_selected')) {
-            setHintsVisibility(false)
-        } else {
-            event.target.focus()
-        }
-    }
-
     return(
         <form onSubmit={search} action='search' className='SearchForm'>
             <div className='SearchForm__input' >
                 <input
-                    fluid
+                    // fluid
                     action='Search'
                     placeholder='Search...'
                     icon='search'
-                    iconPosition='left'
                     onChange={setText}
                     onKeyUp={changeFocus}
                     onFocus={() => {setHintsVisibility(true)}}
                     onBlur={blur}
+                    value={textToSearch}
                 />
                 { hintsVisibility && hints.length > 0 ? 
                     <div className='SearchForm__hints'>
@@ -99,6 +108,6 @@ const SearchForm = observer(() => {
             <button type='submit' className={`SearchForm__button ${textToSearch.length < 2 ? 'SearchForm__button_disabled' : ''}`}>Search</button>
         </form>
     )
-})
+}
 
 export default SearchForm

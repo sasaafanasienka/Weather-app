@@ -1,21 +1,20 @@
 @import '../../variables/style'
 @import './__input/SearchForm__input'
-@import './__input-container/SearchForm__input-container'
 @import './__button/SearchForm__button'
 @import './__hints/SearchForm__hints'
 
 .SearchForm
   position: relative
-  width: 100%
+  width: 1000px
   height: 36px
   display: flex
-  padding: 0 $paddingMin1000
-  margin: 0 0 20px 0
+  box-sizing: border-box
+  margin: 0 auto 20px
+  padding: 0 25px
   
-@media(max-width: $tablets)
+@media(max-width: 1000px)
   .SearchForm
-    width: calc(100% - 50px)
-    padding: 0
-@media(max-width: $phones)
-  .SearchForm
-    width: calc(100% - 26px)
+    width: 100%
+// @media(max-width: $phones)
+//   .SearchForm
+//     width: calc(100% - 26px)

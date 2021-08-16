@@ -1,70 +1,74 @@
-import { observer } from 'mobx-react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../buttons/Button/Button'
-import authStore from '../../store/AuthStore'
-import user from '../../store/UserStore'
 import './Header.sass'
 import logo from '../../images/logo.svg'
-import manUser from '../../images/man.svg'
-import DropdownMenu from '../dropdowns/DropdownMenu/DropdownMenu'
-import DropdownMenuItem from '../dropdowns/DropdownMenuItem/DropdownMenuItem'
-import { useHistory } from "react-router-dom";
+import logoutIcon from '../../images/log-out.svg'
+import SignInModal from '../modals/SignInModal/SignInModal'
+import SignUpModal from '../modals/SignUpModal/SignUpModal'
+import { useDispatch, useSelector } from 'react-redux'
+import MiniButton from '../buttons/MiniButton/MiniButton'
+import { logout as logoutAction } from '../../redux/actions/auth/logout'
+import {useAlert} from 'react-alert'
+import { getCookie } from '../../utilits/cookies'
+import { localLogin } from '../../redux/actions/auth/localLogin'
 
-const Header = observer(() => {
+const Header = () => {
 
-    const history = useHistory()
+    const authStore = useSelector(state => {return state.auth})
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
-    const [ dropdowns, setDropdowns ] = useState({
-        userMenu: false
+    useEffect(() => {
+        const token = getCookie('token')
+        const userName = getCookie('userName')
+        const favs = getCookie('favs')
+        if (token && userName && favs && !authStore.isAuth) {
+            dispatch(localLogin(token, userName, favs, alert))
+        }
     })
 
-    const openDropdown = (name) => {
-        setDropdowns((prev) => { return({...prev, [name]: true })})
-    }
-    const closeDropdown = (name) => {
-        setDropdowns((prev) => { return({...prev, [name]: false })})
-    }
-    const toggleDropdown = (name) => {
-        console.log(dropdowns[name])
-        setDropdowns((prev) => { return({...prev, [name]: !prev[name] })})
+    const [modals, setModals] = useState({
+        signIn: false,
+        signUp: false
+    })
+
+    const toggleModal = (name, method) => {
+        setModals(
+            {...modals, [name]: method === 'close' ? false : method === 'open' ? true : !modals[name]}
+        )
     }
 
     const logout = () => {
-        authStore.logout()
+        dispatch(logoutAction(alert))
     }
 
     const authBlock = () => {
-        if (authStore && authStore.isAuth) {
-            return(
-                <div className='Header__username-button' onClick={() => {toggleDropdown('userMenu')}}>
-                    <div>
-                        <p className='Header__username'>{user.name}</p>
-                        <p className='Header__username'>{user.surname}</p>
-                    </div>
-                    <img style={{height: '36px'}} src={manUser}></img>
-                    { dropdowns['userMenu'] &&
-                    <DropdownMenu closeFunc={() => {closeDropdown('userMenu')}}>
-                        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-                    </DropdownMenu>
-                    }
+        if (authStore.isAuth) {
+            return (
+                <div className='Header__auth-block'>
+                    <p>{`Hello, ${authStore.userName}!`}</p>
+                    <MiniButton icon={logoutIcon} onClick={logout}/>
                 </div>
             )
         }
-
         return(
-            <div>
-                <Button onClick={() => {history.push('/register')}}>Sign up</Button>
-                <Button onClick={() => {history.push('/login')}}>Sign in</Button>
+            <div className='Header__auth-block'>
+                <Button onClick={() => { toggleModal('signIn') }}>Sign in</Button>
+                <Button onClick={() => { toggleModal('signUp') }}>Sign up</Button>
             </div>
         )
     }
 
     return (
-        <header className='Header'>
-            <img className='Header__logo' src={logo} onClick={() => {history.push('/')}}></img>
-            {authBlock()}
-        </header>
+        <>
+            <header className='Header'>
+                <img className='Header__logo' src={logo}></img>
+                {authBlock()}
+            </header>
+            { modals.signIn && <SignInModal closeFunc={ () => {toggleModal('signIn', 'close')} }/> }
+            { modals.signUp && <SignUpModal closeFunc={ () => {toggleModal('signUp', 'close')} }/> }
+        </>
     )
-})
+}
 
 export default Header

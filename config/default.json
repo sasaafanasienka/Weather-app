@@ -1,6 +1,6 @@
 {
     "port": 5000,
     "jwtSecret": "weatherApp0182",
-    "mongoUri": "mongodb+srv://admin:cderfvbgtyhnmju@cluster0.aazj3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" ,
+    "mongoUri": "mongodb+srv://admin:cderfvbgtyhnmju@cluster0.aazj3.mongodb.net/weather-mini?retryWrites=true&w=majority" ,
     "baseUrl": "http://localhost:5000/"
 }

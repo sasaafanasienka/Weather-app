@@ -1,11 +1,12 @@
 .SearchForm__input
     position: relative
+    display: flex
+    align-items: center
     width: 100%
-    min-height: 36px
     z-index: 9
     input
-        background-color: white
-        border: 1px solid #e9e9e9
+        background-color: rgba(255,255,255,1)
+        border: 1px solid white
         border-radius: 4px 0 0 4px
         width: 100%
         height: 36px
@@ -15,6 +16,7 @@
         line-height: 14px
         color: black
         outline: none
-        padding-left: 15px
+        padding: 0 0 0 15px
+        box-sizing: border-box
         &:focus
-            border: 1px solid #2185d0
+            border: 1px solid #005d92

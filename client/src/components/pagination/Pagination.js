@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import './Pagination.sass'
 
 const Pagination = props => {
@@ -10,19 +12,45 @@ const Pagination = props => {
     }
 
     const getPaginationDOM = () => {
-        let paginationDOM = []
+        let paginationMap = []
         for (let i = 0; i < numberOfPages; i++) {
-            paginationDOM.push(
-                <button 
-                    className={`Pagination__button ${i === currentPage ? 'Pagination__button_active' : ''}`}
-                    onClick={i === currentPage ? null : () => {handleClick(i)}}
-                >
-                    {i + 1}
-                </button>
-            )
+            if (i !== 0 && i !== numberOfPages - 1 && (i < currentPage - 1 || i > currentPage + 1)) {
+                if (paginationMap[paginationMap.length - 1] !== '...') {
+                    paginationMap.push('...')
+                }
+            } else {
+                paginationMap.push(i)
+            }
         }
-        return paginationDOM
+        return paginationMap.map((el, index) => {
+            if (el !== '...') {
+                return (
+                    <button 
+                        key={index}
+                        className={`Pagination__button ${el === currentPage ? 'Pagination__button_active' : ''}`}
+                        onClick={el === currentPage ? null : () => {handleClick(el)}}
+                    >
+                        {el + 1}
+                    </button>
+                )
+            } else {
+                return (
+                    <button 
+                        key={index}
+                        className={`Pagination__button`}
+                    >
+                        ...
+                    </button>
+                )
+            }
+        })
     }
+
+    useEffect(() => {
+        if (currentPage + 1 > numberOfPages) {
+            onClick(numberOfPages - 1)
+        }
+    })
 
     return (
         <div className='Pagination'>
