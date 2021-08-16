@@ -8,8 +8,8 @@
     "npm": "6.x"
   },
   "scripts": {
-    "server": "nodemon app.js",
     "start": "node app.js",
+    "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -17,7 +17,6 @@
   "license": "ISC",
   "dependencies": {
     "@heroku-cli/plugin-buildpacks": "^7.54.0",
-    "@heroku/buildpack-registry": "^1.0.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "cors": "^2.8.5",
