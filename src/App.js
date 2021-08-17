@@ -6,14 +6,12 @@ import Header from './components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import MainPage from './pages/MainPage/MainPage';
 import SearchForm from './components/SearchForm/SearchForm';
-import Favourites from './components/Favourites/Favourites';
 import { useEffect } from 'react';
 import { resizeWindow } from './redux/actions/window/resizeWindow';
 
 const App = () => {
 
   const coords = useSelector(state => { return state.coords })
-  const auth = useSelector(state => { return state.auth })
   const dispatch = useDispatch()
 
   const handleResize = event => {
@@ -29,7 +27,6 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Header/>
-        {auth.isAuth && <Favourites/>}
         <SearchForm/>
         <Switch>
           <Route exact path='/'>
