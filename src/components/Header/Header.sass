@@ -1,0 +1,33 @@
+@import '../../variables/style'
+    
+.Header
+    position: relative
+    width: 1000px
+    padding: 25px
+    margin: 0 auto 20px
+    box-sizing: border-box
+    z-index: 10
+    display: flex
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-items: center
+
+@media(max-width: 1000px)
+    .Header
+        width: 100%
+
+.Header__logo
+    height: 36px
+
+.Header__username
+    color: white
+    font-size: 14px
+    margin: 0 10px 0 0
+    text-align: right
+    font-weight: 700
+
+.Header__username-button
+    display: flex
+    align-items: center
+    cursor: pointer
+    position: relative
