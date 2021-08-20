@@ -1,6 +1,6 @@
 import './SearchForm.sass'
 import React, { useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom'; 
 import getRequestUrl from '../../utilits/getRequestUrl'
 import { useDispatch } from 'react-redux';
 import { clearWeather } from '../../redux/actions/weather/clearWeather';
@@ -13,19 +13,24 @@ const SearchForm = () => {
     const [hints, setHints] = useState([])
     const [hintsVisibility, setHintsVisibility] = useState(false)
     const [focus, setFocus] = useState(0)
+    const [timerId, setTimerId] = useState()
 
     const dispatch = useDispatch()
 
-    const setText = async (event) => {
+    const setText = async (event) => {  
+        clearTimeout(timerId) //при вводе каждого символа предыдущий запрос отменяется
         setTextToSearch(event.target.value)
         if (event.target.value.length >= 3) {
-            const URL = await getRequestUrl([event.target.value], 'find')
-            const response = await fetch(URL)
-            const data = await response.json()
-            setFocus(0)
-            if (response.ok) {
-                setHints(data.list)
-            }
+            const id = setTimeout( async () => { //создается небольшая задержка для того чтобы запросы не перекрывали друг друга при быстром вводе текста
+                const URL = await getRequestUrl([event.target.value], 'find')
+                const response = await fetch(URL)
+                const data = await response.json()
+                setFocus(0)
+                if (response.ok) {
+                    setHints(data.list)
+                }
+            }, 180)
+            setTimerId(id)
         } else {
             setHints([])
         }

@@ -11,12 +11,15 @@ import { logout as logoutAction } from '../../redux/actions/auth/logout'
 import {useAlert} from 'react-alert'
 import { getCookie } from '../../utilits/cookies'
 import { localLogin } from '../../redux/actions/auth/localLogin'
+import {useHistory} from 'react-router-dom'
+import { clearWeather } from '../../redux/actions/weather/clearWeather'
 
 const Header = () => {
 
     const authStore = useSelector(state => {return state.auth})
     const dispatch = useDispatch()
     const alert = useAlert()
+    const history = useHistory()
 
     useEffect(() => {
         const token = getCookie('token')
@@ -36,6 +39,11 @@ const Header = () => {
         setModals(
             {...modals, [name]: method === 'close' ? false : method === 'open' ? true : !modals[name]}
         )
+    }
+
+    const pushToMainPage = () => {
+        history.push('/')
+        dispatch(clearWeather())
     }
 
     const logout = () => {
@@ -62,7 +70,7 @@ const Header = () => {
     return (
         <>
             <header className='Header'>
-                <img className='Header__logo' src={logo}></img>
+                <img className='Header__logo' src={logo} onClick={pushToMainPage}></img>
                 {authBlock()}
             </header>
             { modals.signIn && <SignInModal closeFunc={ () => {toggleModal('signIn', 'close')} }/> }

@@ -1,7 +1,7 @@
 //styles
 import './App.css';
 //libs
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Header from './components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import MainPage from './pages/MainPage/MainPage';
@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Header/>
         {auth.isAuth && <Favourites/>}
         <SearchForm/>
@@ -42,7 +42,7 @@ const App = () => {
             <MainPage />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
