@@ -114,4 +114,14 @@ router.put('/removefav', async (req, res) => {
   }
 })
 
+router.get(
+  '/pidor',
+  async (req, res) => {
+  try {
+    res.status(201).json({ message: 'Ty pidor' })
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+})
+
 module.exports = router

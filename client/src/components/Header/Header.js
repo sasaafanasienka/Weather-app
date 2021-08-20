@@ -50,6 +50,26 @@ const Header = () => {
         dispatch(logoutAction(alert))
     }
 
+    const getPidor = async () => {
+        try {
+            const response = await fetch('/api/auth/pidor/')
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            
+        }
+    }
+
+    const herokuPidor = async () => {
+        try {
+            const response = await fetch('https://weather-app-mini.herokuapp.com/api/auth/pidor/')
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            
+        }
+    }
+
     const authBlock = () => {
         if (authStore.isAuth) {
             return (
@@ -63,6 +83,8 @@ const Header = () => {
             <div className='Header__auth-block'>
                 <Button onClick={() => { toggleModal('signIn') }}>Sign in</Button>
                 <Button onClick={() => { toggleModal('signUp') }}>Sign up</Button>
+                <Button onClick={getPidor}>Get pidor</Button>
+                <Button onClick={herokuPidor}>Heroku pidor</Button>
             </div>
         )
     }

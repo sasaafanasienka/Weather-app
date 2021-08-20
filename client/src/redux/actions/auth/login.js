@@ -9,6 +9,7 @@ export const login = (form, alert) => {
                 method: 'POST',
                 body: JSON.stringify(form),
                 headers: {
+                    'Access-Control-Allow-Origin': 'no-cors',
                     'Content-Type': 'application/json'
                 }
             })
