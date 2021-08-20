@@ -1,8 +1,9 @@
 import React, {useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import FavItem from '../FavItem/FavItem';
-import './Favourites.sass'
 import Pagination from '../Pagination/Pagination';
+import './Favourites.sass'
+
 const Favourites = props => {
 
     const favs = useSelector(state => {return state.auth.favs})

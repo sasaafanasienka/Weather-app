@@ -1,18 +1,19 @@
 //styles
 import './App.css';
 //libs
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Header from './components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import MainPage from './pages/MainPage/MainPage';
-import ErrorPage from './pages/ErrorPage/ErrorPage';
 import SearchForm from './components/SearchForm/SearchForm';
+import Favourites from './components/Favourites/Favourites';
 import { useEffect } from 'react';
 import { resizeWindow } from './redux/actions/window/resizeWindow';
 
 const App = () => {
 
   const coords = useSelector(state => { return state.coords })
+  const auth = useSelector(state => { return state.auth })
   const dispatch = useDispatch()
 
   const handleResize = event => {
@@ -26,24 +27,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <Header/>
+        {auth.isAuth && <Favourites/>}
         <SearchForm/>
         <Switch>
           <Route exact path='/'>
             {!coords.isLoaded ? <MainPage /> : <Redirect to={`/coords&lat=${coords.lat}&lon=${coords.lon}`} />}
           </Route>
-          <Route path={`/coords&:coords`}>
+          <Route exact path={`/coords&:coords`}>
             <MainPage />
           </Route>
-          <Route path={`/id&:id`}>
+          <Route exact path={`/id&:id`}>
             <MainPage />
-          </Route>
-          <Route path='*'>
-            <ErrorPage />
           </Route>
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }

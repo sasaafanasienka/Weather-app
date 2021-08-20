@@ -5,23 +5,32 @@ import { loadWeather } from '../../redux/actions/weather/loadWeather';
 import getRequestUrl from '../../utilits/getRequestUrl';
 import tempConvert from '../../utilits/tempConvert';
 import './MainPage.sass'
+import logo from '../../images/logo.svg'
 import Loader from '../../components/Loader/Loader';
 import SunCard from '../../components/SunCard/SunCard';
 import { getCoords } from '../../redux/actions/coords/getCoords';
+import favNo from '../../images/fav-no.svg'
+import favYes from '../../images/fav-yes.svg'
+import MiniButton from '../../components/buttons/MiniButton/MiniButton';
 import weatherIcons from '../../variables/weatherIcons';
+import {useAlert} from 'react-alert'
+import { addFav as addfavAction } from '../../redux/actions/auth/addfav';
+import { removeFav as removefavAction } from '../../redux/actions/auth/removefav';
 
 const MainPage = props => {
 
     const HPA_TO_MMHG = 1.33322387415
 
     const { url } = useRouteMatch()
-    console.log(url)
     const dispatch = useDispatch()
     const weatherData = useSelector(state => {return state.weather.data})
     const weatherIsLoaded = useSelector(state => {return state.weather.isLoaded})
+    const auth = useSelector(state => {return state.auth})
+    const alert = useAlert()
 
     useEffect(() => {
         if (url === '/') {
+            console.log('getCoords')
             dispatch(getCoords())
             return
         }
@@ -41,6 +50,13 @@ const MainPage = props => {
         }
     }, )
 
+    const addFav = () => {
+        dispatch(addfavAction(auth.userName, weatherData.id, alert))
+    }
+    const removeFav = () => {
+        dispatch(removefavAction(auth.userName, weatherData.id, alert))
+    }
+
     return (
         <div className='MainPage'>
             {weatherData ?
@@ -52,6 +68,12 @@ const MainPage = props => {
                             ></img>
                         }
                         <p>{weatherData.name ? weatherData.name : 'Unknown location'}</p>
+                        {auth.isAuth && 
+                            <MiniButton 
+                                onClick={auth.favs.includes(weatherData.id.toString()) ? removeFav : addFav}
+                                icon={auth.favs.includes(weatherData.id.toString()) ? favYes : favNo}
+                            />
+                        }
                     </div>
                     <div className='MainPage__temp'>
                         <p className='MainPage__temp'>{tempConvert(weatherData.main.temp)}</p>
