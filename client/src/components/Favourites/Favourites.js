@@ -31,12 +31,15 @@ const Favourites = props => {
             <div className='Favourites' style={{gridTemplateColumns: `repeat(${ITEMS_PER_PAGE}, 1fr)`}}>
                 {getFavsDOM()}
             </div>
-            <Pagination
-                currentPage={activePage}
-                itemsPerPage={ITEMS_PER_PAGE}
-                numberOfItems={favs.length}
-                onClick={togglePage}
-            />
+            {
+                favs.length > 0 && 
+                <Pagination
+                    currentPage={activePage}
+                    itemsPerPage={ITEMS_PER_PAGE}
+                    numberOfItems={favs.length}
+                    onClick={togglePage}
+                />
+            }
         </>
     );
 }

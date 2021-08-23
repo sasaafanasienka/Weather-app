@@ -36,7 +36,7 @@ const FavItem = props => {
                 setWeather(data)
             }
         }
-        if (!weather) {
+        if (!weather && type !== 'nofavs') {
             fetchData()
         }
     });
