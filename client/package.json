@@ -2,7 +2,7 @@
   "name": "10-weather-app",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://sasaafanasienka.github.io/weather-app-client",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
