@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import './Pagination.sass'
 
 const Pagination = props => {

@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import FavItem from '../FavItem/FavItem';
-import Pagination from '../Pagination/Pagination.js';
+// import Pagination from '../Pagination/Pagination';
 import './Favourites.sass'
 
 const Favourites = props => {
@@ -31,7 +31,7 @@ const Favourites = props => {
             <div className='Favourites' style={{gridTemplateColumns: `repeat(${ITEMS_PER_PAGE}, 1fr)`}}>
                 {getFavsDOM()}
             </div>
-            {
+            {/* {
                 favs.length > 0 && 
                 <Pagination
                     currentPage={activePage}
@@ -39,7 +39,7 @@ const Favourites = props => {
                     numberOfItems={favs.length}
                     onClick={togglePage}
                 />
-            }
+            } */}
         </>
     );
 }
