@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import FavItem from '../FavItem/FavItem';
-import Pagination from '../Pagination/Pagination';
+import Pagination from '../Pagination/Pagination.js';
 import './Favourites.sass'
 
 const Favourites = props => {
