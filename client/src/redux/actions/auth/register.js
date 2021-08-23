@@ -1,10 +1,11 @@
 import { setCookie } from "../../../utilits/cookies"
 import { REGISTER } from "../../types/types"
+import { baseRequestURL } from "../../../variables/baseRequestURL"
 
 export const register = (form, alert) => {
     return async dispatch => {
         try {
-            const response = await fetch('/api/auth/register', {
+            const response = await fetch(`${baseRequestURL}/api/auth/register`, {
                 method: 'POST',
                 body: JSON.stringify(form),
                 headers: {

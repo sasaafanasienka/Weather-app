@@ -1,10 +1,11 @@
 import { setCookie } from "../../../utilits/cookies"
 import { ADDFAV } from "../../types/types"
+import { baseRequestURL } from "../../../variables/baseRequestURL"
 
 export const removeFav = (login, id, alert) => {
     return async dispatch => {
         try {
-            const response = await fetch('/api/auth/removefav', {
+            const response = await fetch(`${baseRequestURL}/api/auth/removefav`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     login: login, id: id.toString()

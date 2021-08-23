@@ -1,11 +1,12 @@
 import { setCookie } from "../../../utilits/cookies"
 import { LOGIN } from "../../types/types"
+import { baseRequestURL } from "../../../variables/baseRequestURL"
 
 export const login = (form, alert) => {
 
     return async dispatch => {
         try {
-            const response = await fetch('https://weather-app-mini.herokuapp.com/api/auth/login', {
+            const response = await fetch(`${baseRequestURL}/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify(form),
                 headers: {
