@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import FavItem from '../FavItem/FavItem';
-import Pagination from '../Pagination/Pagination';
+import PageSwitcher from '../PageSwitcher/PageSwitcher';
 import './Favourites.sass'
 
 const Favourites = props => {
@@ -33,7 +33,7 @@ const Favourites = props => {
             </div>
             {
                 favs.length > 0 && 
-                <Pagination
+                <PageSwitcher
                     currentPage={activePage}
                     itemsPerPage={ITEMS_PER_PAGE}
                     numberOfItems={favs.length}

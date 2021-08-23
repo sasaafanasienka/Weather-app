@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import './Pagination.sass'
+import './PageSwitcher.sass'
 
-const Pagination = props => {
+const PageSwitcher = props => {
 
     const {currentPage, itemsPerPage, numberOfItems, onClick } = props
     const numberOfPages = Math.ceil(numberOfItems / itemsPerPage)
@@ -10,23 +10,23 @@ const Pagination = props => {
         onClick(index)
     }
 
-    const getPaginationDOM = () => {
-        let paginationMap = []
+    const getPageSwitcherDOM = () => {
+        let pageSwitcherMap = []
         for (let i = 0; i < numberOfPages; i++) {
             if (i !== 0 && i !== numberOfPages - 1 && (i < currentPage - 1 || i > currentPage + 1)) {
-                if (paginationMap[paginationMap.length - 1] !== '...') {
-                    paginationMap.push('...')
+                if (pageSwitcherMap[pageSwitcherMap.length - 1] !== '...') {
+                    pageSwitcherMap.push('...')
                 }
             } else {
-                paginationMap.push(i)
+                pageSwitcherMap.push(i)
             }
         }
-        return paginationMap.map((el, index) => {
+        return pageSwitcherMap.map((el, index) => {
             if (el !== '...') {
                 return (
                     <button 
                         key={index}
-                        className={`Pagination__button ${el === currentPage ? 'Pagination__button_active' : ''}`}
+                        className={`PageSwitcher__button ${el === currentPage ? 'PageSwitcher__button_active' : ''}`}
                         onClick={el === currentPage ? null : () => {handleClick(el)}}
                     >
                         {el + 1}
@@ -36,7 +36,7 @@ const Pagination = props => {
                 return (
                     <button 
                         key={index}
-                        className={`Pagination__button`}
+                        className={`PageSwitcher__button`}
                     >
                         ...
                     </button>
@@ -52,16 +52,16 @@ const Pagination = props => {
     })
 
     return (
-        <div className='Pagination'>
+        <div className='PageSwitcher'>
             <button 
-                className={`Pagination__button ${currentPage === 0 ? 'Pagination__button_disabled' : ''}`}
+                className={`PageSwitcher__button ${currentPage === 0 ? 'PageSwitcher__button_disabled' : ''}`}
                 onClick={currentPage === 0 ? null : () => {handleClick(currentPage - 1)}}
             >
                 {'<'}
             </button>
-            {getPaginationDOM()}
+            {getPageSwitcherDOM()}
             <button 
-                className={`Pagination__button ${currentPage === numberOfPages - 1 ? 'Pagination__button_disabled' : ''}`}
+                className={`PageSwitcher__button ${currentPage === numberOfPages - 1 ? 'PageSwitcher__button_disabled' : ''}`}
                 onClick={currentPage === numberOfPages - 1 ? null : () => {handleClick(currentPage + 1)}}
             >
                 {'>'}
@@ -70,4 +70,4 @@ const Pagination = props => {
     )
 }
 
-export default Pagination
+export default PageSwitcher
