@@ -15,7 +15,6 @@ export const removeFav = (login, id, alert) => {
                 }
             })
             const data = await response.json()
-            console.log(data)
             const payload = data.favs
             if (response.ok) {
                 dispatch({

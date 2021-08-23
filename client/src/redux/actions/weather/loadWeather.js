@@ -5,7 +5,6 @@ export const loadWeather = (URL) => {
         try {
             const response = await fetch(URL)
             const data = await response.json()
-            console.log(data)
             const payload = {
                 isLoaded: true,
                 data: data
@@ -19,7 +18,7 @@ export const loadWeather = (URL) => {
                 throw Error(data.message)
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 }

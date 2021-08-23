@@ -29,7 +29,6 @@ const MainPage = props => {
 
     useEffect(() => {
         if (url === '/') {
-            console.log('getCoords')
             dispatch(getCoords())
             return
         }
