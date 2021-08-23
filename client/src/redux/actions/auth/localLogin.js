@@ -1,4 +1,4 @@
-import { LOCALLOGIN, LOGIN } from "../../types/types"
+import { LOGIN } from "../../types/types"
 
 export const localLogin = (token, userName, favs, alert) => {
     return dispatch => {

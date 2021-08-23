@@ -5,7 +5,6 @@ import { loadWeather } from '../../redux/actions/weather/loadWeather';
 import getRequestUrl from '../../utilits/getRequestUrl';
 import tempConvert from '../../utilits/tempConvert';
 import './MainPage.sass'
-import logo from '../../images/logo.svg'
 import Loader from '../../components/Loader/Loader';
 import SunCard from '../../components/SunCard/SunCard';
 import { getCoords } from '../../redux/actions/coords/getCoords';

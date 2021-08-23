@@ -5,13 +5,13 @@ import sad from '../../images/sad.svg'
 import surprise from '../../images/surprise.svg'
 
 const Alert = props => {
-    const { style, options, message, close } = props
+    const { options, message } = props
 
     return (
         <div className='Alert'>
-            {options.type === 'info' && <img className='Alert__icon' src={surprise}></img>}
-            {options.type === 'success' && <img className='Alert__icon' src={smile}></img>}
-            {options.type === 'error' && <img className='Alert__icon' src={sad}></img>}
+            {options.type === 'info' && <img className='Alert__icon' src={surprise} alt=''></img>}
+            {options.type === 'success' && <img className='Alert__icon' src={smile} alt=''></img>}
+            {options.type === 'error' && <img className='Alert__icon' src={sad} alt=''></img>}
             <p>{message}</p>
         </div>
     );

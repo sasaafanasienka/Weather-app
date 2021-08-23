@@ -63,6 +63,7 @@ const FavItem = props => {
                         {weather.sys.country && 
                             <img className='FavItem__location-flag' 
                                 src={`https://www.countryflags.io/${weather.sys.country}/flat/32.png`}
+                                alt=''
                             ></img>
                         }
                         <p className='FavItem__location-name'>{weather.name}</p>
@@ -74,7 +75,7 @@ const FavItem = props => {
                     </div>
                     <div className='FavItem__weather'>
                         <p className='FavItem__weather-temp'>{tempConvert(weather.main.temp)}</p>
-                        <img className='FavItem__weather-icon' src={weatherIcons[weather.weather[0].icon]}></img>
+                        <img className='FavItem__weather-icon' src={weatherIcons[weather.weather[0].icon]} alt=''></img>
                     </div>
                 </> 
                 : 
