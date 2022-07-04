@@ -60,13 +60,7 @@ const FavItem = props => {
             {weather ? 
                 <>  
                     <div className='FavItem__location'>
-                        {weather.sys.country && 
-                            <img className='FavItem__location-flag' 
-                                src={`https://www.countryflags.io/${weather.sys.country}/flat/32.png`}
-                                alt=''
-                            ></img>
-                        }
-                        <p className='FavItem__location-name'>{weather.name}</p>
+                        <p className='FavItem__location-name'>{`${weather.name}, ${weather.sys.country}`}</p>
                         <MiniButton
                             onClick={removefav}
                             icon={favYes}

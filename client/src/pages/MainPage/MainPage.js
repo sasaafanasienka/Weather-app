@@ -60,12 +60,7 @@ const MainPage = props => {
             {weatherData ?
                 <>
                     <div className='MainPage__location'>
-                        {weatherData.sys.country && 
-                            <img className='MainPage__location-flag' 
-                                src={`https://www.countryflags.io/${weatherData.sys.country}/flat/32.png`}
-                            ></img>
-                        }
-                        <p>{weatherData.name ? weatherData.name : 'Unknown location'}</p>
+                        <p>{weatherData.name ? `${weatherData.name}, ${weatherData.sys.country}` : 'Unknown location'}</p>
                         {auth.isAuth && 
                             <MiniButton 
                                 onClick={auth.favs.includes(weatherData.id.toString()) ? removeFav : addFav}

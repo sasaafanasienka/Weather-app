@@ -82,7 +82,6 @@ const SearchForm = () => {
                     onMouseOver={changeFocusByMouse}
                     className={`${index === focus ? 'SearchForm__hints-button_selected' : 'SearchForm__hints-button'}`}
                 >
-                    <img src={`https://www.countryflags.io/${el.sys.country}/flat/16.png`} alt='country flag'></img>
                     {`${el.name}, ${el.sys.country} ${Math.round(el.main.temp)}\u00B0C`}
                 </button>
             )
