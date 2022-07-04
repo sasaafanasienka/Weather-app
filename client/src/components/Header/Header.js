@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Button from '../buttons/Button/Button'
 import './Header.sass'
 import logo from '../../images/logo.svg'
+import burger from '../../images/burger.svg'
 import logoutIcon from '../../images/log-out.svg'
 import SignInModal from '../modals/SignInModal/SignInModal'
 import SignUpModal from '../modals/SignUpModal/SignUpModal'
@@ -13,6 +14,7 @@ import { getCookie } from '../../utilits/cookies'
 import { localLogin } from '../../redux/actions/auth/localLogin'
 import {useHistory} from 'react-router-dom'
 import { clearWeather } from '../../redux/actions/weather/clearWeather'
+import MenuModal from '../modals/MenuModal/MenuModal'
 
 const Header = () => {
 
@@ -32,7 +34,8 @@ const Header = () => {
 
     const [modals, setModals] = useState({
         signIn: false,
-        signUp: false
+        signUp: false,
+        menu: false,
     })
 
     const toggleModal = (name, method) => {
@@ -70,11 +73,13 @@ const Header = () => {
     return (
         <>
             <header className='Header'>
-                <img className='Header__logo' src={logo} onClick={pushToMainPage}></img>
+                {/* <img className='Header__logo' src={burger} onClick={pushToMainPage}></img> */}
+                <img className='Header__logo' src={burger} onClick={() => { toggleModal('menu') }}></img>
                 {authBlock()}
             </header>
             { modals.signIn && <SignInModal closeFunc={ () => {toggleModal('signIn', 'close')} }/> }
             { modals.signUp && <SignUpModal closeFunc={ () => {toggleModal('signUp', 'close')} }/> }
+            { modals.menu && <MenuModal closeFunc={ () => {toggleModal('menu', 'close')} }/> }
         </>
     )
 }

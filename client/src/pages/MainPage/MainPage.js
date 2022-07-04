@@ -22,9 +22,10 @@ const MainPage = props => {
 
     const { url } = useRouteMatch()
     const dispatch = useDispatch()
-    const weatherData = useSelector(state => {return state.weather.data})
-    const weatherIsLoaded = useSelector(state => {return state.weather.isLoaded})
-    const auth = useSelector(state => {return state.auth})
+    const weatherData = useSelector(state => state.weather.data)
+    const weatherIsLoaded = useSelector(state => state.weather.isLoaded)
+    const degrees = useSelector(state => state.settings.degrees)
+    const auth = useSelector(state => state.auth)
     const alert = useAlert()
 
     useEffect(() => {
@@ -69,10 +70,10 @@ const MainPage = props => {
                         }
                     </div>
                     <div className='MainPage__temp'>
-                        <p className='MainPage__temp'>{tempConvert(weatherData.main.temp)}</p>
+                        <p className='MainPage__temp'>{tempConvert(weatherData.main.temp, degrees)}</p>
                         <img src={weatherIcons[weatherData.weather[0].icon]}></img>
                     </div>
-                    <p className='MainPage__description'>{`Feels like ${tempConvert(weatherData.main.feels_like)}`}</p>
+                    <p className='MainPage__description'>{`Feels like ${tempConvert(weatherData.main.feels_like, degrees)}`}</p>
                     <div className='MainPage__info'>
                         <div className='MainPage__info-item'>
                             <p className='MainPage__info-title'>Humidity</p>
