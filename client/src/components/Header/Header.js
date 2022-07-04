@@ -38,10 +38,21 @@ const Header = () => {
         menu: false,
     })
 
-    const toggleModal = (name, method) => {
-        setModals(
-            {...modals, [name]: method === 'close' ? false : method === 'open' ? true : !modals[name]}
-        )
+    const toggleModal = (name, method = 'open') => {
+        if (method === 'close') {
+            setModals ({...modals, [name]: false }) 
+        } else {
+            const keysArr = Object.keys(modals)
+            const res = {}
+            keysArr.forEach(el => {
+                if (el === name) {
+                    res[el] = true
+                } else {
+                    res[el] = false
+                }
+            })
+            setModals(res)
+        }
     }
 
     const pushToMainPage = () => {

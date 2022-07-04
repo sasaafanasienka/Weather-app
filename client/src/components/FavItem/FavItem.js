@@ -21,6 +21,8 @@ const FavItem = props => {
     const alert = useAlert()
     const history = useHistory()
 
+    const degrees = useSelector(state => state.settings.degrees)
+
     const pushToPage = (event) => {
         if (event.nativeEvent.path[0].id || event.nativeEvent.path[1].id || event.nativeEvent.path[2].id) {
             dispatch(clearWeather())
@@ -68,7 +70,7 @@ const FavItem = props => {
                         />
                     </div>
                     <div className='FavItem__weather'>
-                        <p className='FavItem__weather-temp'>{tempConvert(weather.main.temp)}</p>
+                        <p className='FavItem__weather-temp'>{tempConvert(weather.main.temp, degrees)}</p>
                         <img className='FavItem__weather-icon' src={weatherIcons[weather.weather[0].icon]} alt=''></img>
                     </div>
                 </> 

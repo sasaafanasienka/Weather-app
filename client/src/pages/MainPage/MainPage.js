@@ -15,6 +15,8 @@ import weatherIcons from '../../variables/weatherIcons';
 import {useAlert} from 'react-alert'
 import { addFav as addfavAction } from '../../redux/actions/auth/addfav';
 import { removeFav as removefavAction } from '../../redux/actions/auth/removefav';
+import { windSpeedConvert } from '../../utilits/windSpeedConvert';
+import { pressureConvert } from '../../utilits/pressureConvert';
 
 const MainPage = props => {
 
@@ -25,6 +27,8 @@ const MainPage = props => {
     const weatherData = useSelector(state => state.weather.data)
     const weatherIsLoaded = useSelector(state => state.weather.isLoaded)
     const degrees = useSelector(state => state.settings.degrees)
+    const windUnits = useSelector(state => state.settings.windspeed)
+    const pressureUnits = useSelector(state => state.settings.pressure)
     const auth = useSelector(state => state.auth)
     const alert = useAlert()
 
@@ -81,13 +85,13 @@ const MainPage = props => {
                         </div>
                         <div className='MainPage__info-item'>
                             <p className='MainPage__info-title'>Wind</p>
-                            <p className='MainPage__info-data'>{weatherData.wind.speed.toFixed(1)}</p>
-                            <p className='MainPage__info-unit'>m/s</p>
+                            <p className='MainPage__info-data'>{windSpeedConvert(weatherData.wind.speed, windUnits)}</p>
+                            <p className='MainPage__info-unit'>{windUnits}</p>
                         </div>
                         <div className='MainPage__info-item'>
                             <p className='MainPage__info-title'>Pressure</p>
-                            <p className='MainPage__info-data'>{(weatherData.main.pressure/HPA_TO_MMHG).toFixed(0)}</p>
-                            <p className='MainPage__info-unit'>mmHg</p>
+                            <p className='MainPage__info-data'>{pressureConvert(weatherData.main.pressure, pressureUnits)}</p>
+                            <p className='MainPage__info-unit'>{pressureUnits}</p>
                         </div>
                         <div className='MainPage__info-item'>
                             <p className='MainPage__info-title'>Visibility</p>
